@@ -13,6 +13,8 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from functools import wraps
 from flask import abort
 from flask_gravatar import Gravatar
+import os
+from dotenv import dotenv_values
 
 '''
 Make sure the required packages are installed: 
@@ -28,7 +30,11 @@ This will install the packages from the requirements.txt for this project.
 '''
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+#app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+config = dotenv_values(".env")
+app.config['SECRET_KEY'] = config["FLASH_KEY"]
+#app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
